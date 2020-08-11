@@ -299,6 +299,13 @@ void FromZ::writeGoZFile(
                     std::swap(tmp.c[1], tmp.c[2]);
                 }
                 GoZFile.write(tmp.c, 4);
+                tmp.f = 1.0f;
+                if (!isThisSystemLittleEndian)
+                {
+                    std::swap(tmp.c[0], tmp.c[3]);
+                    std::swap(tmp.c[1], tmp.c[2]);
+                }
+                GoZFile.write(tmp.c, 4);
             }
         }
     }
