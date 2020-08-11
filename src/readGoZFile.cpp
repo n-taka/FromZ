@@ -84,7 +84,7 @@ void FromZ::readGoZFile(
         GoZFile.read(buf.data(), lenObjName);
         meshName = std::string(buf.begin(), buf.end());
         // remove prefix "GoZMesh_"
-        if(meshName.substr(0, 8) == "GoZMesh_")
+        if (meshName.substr(0, 8) == "GoZMesh_")
         {
             meshName = meshName.substr(8);
         }
@@ -190,6 +190,11 @@ void FromZ::readGoZFile(
                     }
                     vertex.at(xyz) = static_cast<Scalar>(tmp.f);
                 }
+                // [Prevent flip]
+                // As long as read/write with FromZ, this solves flipping problem
+                // Possible reason is that ZBrush uses left-handed coordinate system
+                vertex.at(1) *= -1;
+                vertex.at(2) *= -1;
                 V.at(v) = vertex;
             }
         }
