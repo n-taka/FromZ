@@ -1,0 +1,14 @@
+.DS_Store
+*~
+#*
+*#
+*.o
+**/Debug
+**/Release
+**/x64
+GeneratedFiles
+.vs
+*.db
+*.opendb
+build/
+.vscode/
