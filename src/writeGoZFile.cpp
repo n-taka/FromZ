@@ -4,7 +4,7 @@
 #include "writeGoZFile.h"
 
 #include <fstream>
-#include <iostream>
+#include <cmath>
 
 template <typename Scalar, typename Index>
 void FromZ::writeGoZFile(
@@ -18,7 +18,7 @@ void FromZ::writeGoZFile(
     std::vector<double> M;
     std::vector<int> G;
 
-    FromZ::writeGoZFile(GoZBinFilenamem, meshName, V, F, UV, VC, M, G);
+    FromZ::writeGoZFile(GoZBinFilename, meshName, V, F, UV, VC, M, G);
 }
 
 template <typename Scalar, typename Index>
@@ -53,7 +53,7 @@ void FromZ::writeGoZFile(
     // GoZ binary file uses littele endian
     bool isThisSystemLittleEndian = false;
     {
-        uint32_char tmp ={ 0x01020304 };
+        uint32_char tmp = {0x01020304};
         isThisSystemLittleEndian = (tmp.c[0] == 4);
     }
 
@@ -64,7 +64,7 @@ void FromZ::writeGoZFile(
     {
         std::string buf("GoZb 1.0 ZBrush GoZ Binary");
         GoZFile.write(buf.c_str(), buf.size());
-        for (int i=0;i<6;++i)
+        for (int i = 0; i < 6; ++i)
         {
             GoZFile.put(static_cast<unsigned char>(0x2E));
         }
@@ -172,9 +172,9 @@ void FromZ::writeGoZFile(
         }
         GoZFile.write(tmp.c, 8);
     }
-    for (const auto& vertex : V)
+    for (const auto &vertex : V)
     {
-        for (const auto& xyz : vertex)
+        for (const auto &xyz : vertex)
         {
             float_char tmp;
             tmp.f = static_cast<float>(xyz);
@@ -216,9 +216,9 @@ void FromZ::writeGoZFile(
         }
         GoZFile.write(tmp.c, 8);
     }
-    for (const auto& face : F)
+    for (const auto &face : F)
     {
-        for (const auto& fv : face)
+        for (const auto &fv : face)
         {
             uint32_char tmp;
             tmp.i = static_cast<uint32_t>(fv);
@@ -229,7 +229,7 @@ void FromZ::writeGoZFile(
             }
             GoZFile.write(tmp.c, 4);
         }
-        for (int i=face.size();i<4;++i)
+        for (int i = face.size(); i < 4; ++i)
         {
             GoZFile.put(static_cast<unsigned char>(0xff));
             GoZFile.put(static_cast<unsigned char>(0xff));
@@ -269,9 +269,9 @@ void FromZ::writeGoZFile(
             }
             GoZFile.write(tmp.c, 8);
         }
-        for (const auto& faceUV : UV)
+        for (const auto &faceUV : UV)
         {
-            for (const auto& uv : faceUV)
+            for (const auto &uv : faceUV)
             {
                 float_char tmp;
                 tmp.f = static_cast<float>(uv.first);
@@ -289,7 +289,7 @@ void FromZ::writeGoZFile(
                 }
                 GoZFile.write(tmp.c, 4);
             }
-            for (int i=faceUV.size();i<4;++i)
+            for (int i = faceUV.size(); i < 4; ++i)
             {
                 float_char tmp;
                 tmp.f = 0.0f;
@@ -341,7 +341,7 @@ void FromZ::writeGoZFile(
             }
             GoZFile.write(tmp.c, 8);
         }
-        for (const auto& vc : VC)
+        for (const auto &vc : VC)
         {
             uint32_char tmp;
             tmp.uc[0] = static_cast<unsigned char>(std::round(vc.at(2) * 255.0));
@@ -384,7 +384,7 @@ void FromZ::writeGoZFile(
             }
             GoZFile.write(tmp.c, 8);
         }
-        for (const auto& m : M)
+        for (const auto &m : M)
         {
             uint32_char tmp;
             tmp.i = static_cast<uint32_t>(std::round(m * std::numeric_limits<uint16_t>::max()));
@@ -428,7 +428,7 @@ void FromZ::writeGoZFile(
             }
             GoZFile.write(tmp.c, 8);
         }
-        for (const auto& g : G)
+        for (const auto &g : G)
         {
             uint32_char tmp;
             tmp.i = static_cast<uint32_t>(g);
@@ -451,6 +451,5 @@ void FromZ::writeGoZFile(
 
     GoZFile.close();
 }
-
 
 #endif
