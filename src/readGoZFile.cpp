@@ -88,6 +88,12 @@ void FromZ::readGoZFile(
         {
             meshName = meshName.substr(8);
         }
+        // erase white space and non-printable
+        const auto isInValid = [](const int c)
+        {
+            return (!isprint(c) || isspace(c));
+        };
+        meshName.erase(std::remove_if(meshName.begin(), meshName.end(), isInValid), meshName.end());
     }
 
     //////
