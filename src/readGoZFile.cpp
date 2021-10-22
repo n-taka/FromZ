@@ -50,7 +50,7 @@ void FromZ::readGoZFile(
         char c[4];
     };
 
-    // GoZ binary file uses littele endian
+    // GoZ binary file uses little endian
     bool isThisSystemLittleEndian = false;
     {
         uint32_char tmp ={ 0x01020304 };
@@ -192,7 +192,7 @@ void FromZ::readGoZFile(
                 }
                 // [Prevent flip]
                 // As long as read/write with FromZ, this solves flipping problem
-                // Possible reason is that ZBrush uses left-handed coordinate system
+                // In ZBrush, +Y goes downward and +Z goes into the screen
                 vertex.at(1) *= -1;
                 vertex.at(2) *= -1;
                 V.at(v) = vertex;
