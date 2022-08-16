@@ -13,10 +13,10 @@ void FromZ::writeGoZFile(
     const std::vector<std::vector<Scalar>> &V,
     const std::vector<std::vector<Index>> &F)
 {
-    std::vector<std::vector<std::pair<double, double>>> UV;
-    std::vector<std::vector<double>> VC;
-    std::vector<double> M;
-    std::vector<int> G;
+    std::vector<std::vector<std::pair<Scalar, Scalar>>> UV;
+    std::vector<std::vector<Scalar>> VC;
+    std::vector<Scalar> M;
+    std::vector<Index> G;
 
     FromZ::writeGoZFile(GoZBinFilename, meshName, V, F, UV, VC, M, G);
 }
