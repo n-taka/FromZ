@@ -16,7 +16,7 @@ void FromZ::readGoZFile(
     std::vector<std::vector<std::pair<Scalar, Scalar>>> UV;
     std::vector<std::vector<Scalar>> VC;
     std::vector<Scalar> M;
-    std::vector<int> G;
+    std::vector<Index> G;
 
     FromZ::readGoZFile(GoZBinFilename, meshName, V, F, UV, VC, M, G);
 }
